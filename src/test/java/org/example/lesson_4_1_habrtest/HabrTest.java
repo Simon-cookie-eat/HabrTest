@@ -13,7 +13,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import java.time.Duration;
 import java.util.List;
 
-public class MainPageTest {
+public class HabrTest {
     private WebDriver driver;
 
     @BeforeEach
@@ -56,8 +56,20 @@ public class MainPageTest {
         companyProfile.click();
 
         List<WebElement> companyLink = driver.findElements(By.xpath("//*[contains(@href, 'http://www.ya.ru/')]"));
-        
+
         assertFalse(companyLink.isEmpty(), "Ссылка на сайт компании отсутствует");
+    }
+
+    @Test
+    @DisplayName("Проверка наличия кнопки 'Написать публикацию' в разделе 'Как стать автором'")
+    public void errorMessageTest() {
+        WebElement becomeAuthorButton = driver.findElement(By.cssSelector(".tm-header__become-author-btn"));
+        becomeAuthorButton.click();
+
+        List<WebElement> newAuthorsButton = driver.findElements(By.xpath("//*[contains(text(),'Новые авторы')]"));
+
+        assertFalse(newAuthorsButton.isEmpty(), "Кнопка 'Новые авторы' отсутствует");
+
     }
 
 }
