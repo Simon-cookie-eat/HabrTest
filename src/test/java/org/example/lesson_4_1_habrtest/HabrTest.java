@@ -44,20 +44,24 @@ public class HabrTest {
     }
 
     @Test
-    @DisplayName("Проверка наличия ссылки компании в профиле компании 'Яндекс'")
+    @DisplayName("Проверка наличия ссылки компании в профиле компании")
     public void companyLinkTest() {
-        WebElement companiesButton = driver.findElement(By.xpath("//*[contains(text(),'Компании')]"));
+        String companyName = "Яндекс";
+        String companySite = "http://www.ya.ru/";
+
+        WebElement companiesButton = driver.findElement(By.xpath("//li/*[contains(@href,'/ru/companies')]"));
         companiesButton.click();
 
         WebElement searchButton = driver.findElement(By.cssSelector(".tm-input-text-decorated__input"));
-        searchButton.sendKeys("Яндекс");
+        searchButton.sendKeys(companyName);
 
         WebElement companyProfile = driver.findElement(By.cssSelector(".searched-item:first-of-type"));
         companyProfile.click();
 
-        List<WebElement> companyLink = driver.findElements(By.xpath("//*[contains(@href, 'http://www.ya.ru/')]"));
+        List<WebElement> companyLink = driver.findElements(By.xpath("//*[contains(@class, 'tm-company-basic-info__link')]"));
 
         assertFalse(companyLink.isEmpty(), "Ссылка на сайт компании отсутствует");
+        companySite.equals(companyLink.get(0).toString());
     }
 
     @Test
