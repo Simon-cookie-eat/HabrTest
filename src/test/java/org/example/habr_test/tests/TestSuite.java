@@ -1,4 +1,4 @@
-package org.example.lesson_4_1_habrtest;
+package org.example.habr_test.tests;
 
 import org.junit.platform.suite.api.SelectPackages;
 import org.junit.platform.suite.api.Suite;

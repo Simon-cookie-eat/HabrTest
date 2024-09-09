@@ -1,4 +1,4 @@
-package org.example.lesson_4_1_habrtest;
+package org.example.habr_test.tests;
 
 import org.junit.jupiter.api.*;
 
@@ -13,7 +13,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import java.time.Duration;
 import java.util.List;
 
-public class HabrTest {
+public class MainPageTest {
     private WebDriver driver;
 
     @BeforeEach
