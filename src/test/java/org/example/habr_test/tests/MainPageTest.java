@@ -1,5 +1,7 @@
 package org.example.habr_test.tests;
 
+import org.example.habr_test.pages.HabrMainPage;
+import org.example.habr_test.resources.BaseTest;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,23 +15,77 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import java.time.Duration;
 import java.util.List;
 
-public class MainPageTest {
+public class MainPageTest extends BaseTest {
     private WebDriver driver;
+    private HabrMainPage habrMainPage;
 
     @BeforeEach
+    @Override
     public void setUp() {
-        ChromeOptions options = new ChromeOptions();
-        // Fix the issue https://github.com/SeleniumHQ/selenium/issues/11750
-        options.addArguments("--remote-allow-origins=*");
-        driver = new ChromeDriver(options);
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.get("https://www.habr.com/");
+        super.setUp();
+        getDriver().get("https://habr.com/ru/feed/");
+        habrMainPage = new HabrMainPage(getDriver());
     }
 
     @AfterEach
     public void tearDown() {
         driver.quit();
+    }
+
+    @Test
+    @DisplayName("Проверка перехода по кнопке 'Все потоки'")
+    public void clickButtonArticlesTest(){
+        String tabLink = "https://habr.com/ru/articles/";
+        habrMainPage.clickButtonArticles();
+        assertEquals(tabLink, driver.getCurrentUrl(), "Переход не произошёл");
+    }
+
+    @Test
+    @DisplayName("Проверка перехода по кнопке 'Разработка'")
+    public void clickButtonDevelopTest(){
+        String tabLink = "https://habr.com/ru/develop/";
+        habrMainPage.clickButtonDevelop();
+        assertEquals(tabLink, driver.getCurrentUrl(), "Переход не произошёл");
+    }
+
+    @Test
+    @DisplayName("Проверка перехода по кнопке 'Администрирование'")
+    public void clickButtonAdminTest(){
+        String tabLink = "https://habr.com/ru/admin/";
+        habrMainPage.clickButtonAdmin();
+        assertEquals(tabLink, driver.getCurrentUrl(), "Переход не произошёл");
+    }
+
+    @Test
+    @DisplayName("Проверка перехода по кнопке 'Дизайн'")
+    public void clickButtonDesignTest(){
+        String tabLink = "https://habr.com/ru/design/";
+        habrMainPage.clickButtonDesign();
+        assertEquals(tabLink, driver.getCurrentUrl(), "Переход не произошёл");
+    }
+
+    @Test
+    @DisplayName("Проверка перехода по кнопке 'Менеджмент'")
+    public void clickButtonManagementTest(){
+        String tabLink = "https://habr.com/ru/management/";
+        habrMainPage.clickButtonManagement();
+        assertEquals(tabLink, driver.getCurrentUrl(), "Переход не произошёл");
+    }
+
+    @Test
+    @DisplayName("Проверка перехода по кнопке 'Маркетинг'")
+    public void clickButtonMarketingTest(){
+        String tabLink = "https://habr.com/ru/marketing/";
+        habrMainPage.clickButtonMarketing();
+        assertEquals(tabLink, driver.getCurrentUrl(), "Переход не произошёл");
+    }
+
+    @Test
+    @DisplayName("Проверка перехода по кнопке 'Научпоп'")
+    public void clickButtonPopSciTest(){
+        String tabLink = "https://habr.com/ru/popsci/";
+        habrMainPage.clickButtonPopSci();
+        assertEquals(tabLink, driver.getCurrentUrl(), "Переход не произошёл");
     }
 
     @Test
@@ -75,5 +131,7 @@ public class MainPageTest {
         assertFalse(newAuthorsButton.isEmpty(), "Кнопка 'Новые авторы' отсутствует");
 
     }
+
+
 
 }
